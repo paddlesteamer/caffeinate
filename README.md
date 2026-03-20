@@ -8,6 +8,7 @@ A simple macOS menu bar app that toggles the `caffeinate -d` command to prevent 
 - **Right-click**: Quit the app
 - Visual feedback with different icons for active/inactive states
 - Automatically disables when the lid is closed
+- Automatically launches at login
 - Runs as a menu bar app (no dock icon)
 
 ## What is `caffeinate -d`?
@@ -47,11 +48,7 @@ cp -r build/CaffeinateToggle.app /Applications/
 
 ## Auto-start at Login
 
-To have the app start automatically when you log in:
-
-1. Open **System Preferences** → **General** → **Login Items**
-2. Click the **+** button
-3. Navigate to `/Applications/CaffeinateToggle.app` and add it
+The app registers itself as a login item automatically on first launch (macOS 13+). No manual configuration needed.
 
 ## Icons
 

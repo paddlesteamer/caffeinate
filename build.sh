@@ -15,6 +15,7 @@ mkdir -p "$APP_BUNDLE/Contents/Resources"
 echo "Compiling..."
 swiftc -o "$APP_BUNDLE/Contents/MacOS/$APP_NAME" \
     -framework Cocoa \
+    -framework ServiceManagement \
     Caffeinate/main.swift
 
 if [ $? -ne 0 ]; then

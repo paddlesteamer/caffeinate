@@ -1,4 +1,5 @@
 import Cocoa
+import ServiceManagement
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItem: NSStatusItem!
@@ -23,6 +24,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Add right-click support
         if let button = statusItem.button {
             button.sendAction(on: [.leftMouseUp, .rightMouseUp])
+        }
+
+        // Register as a login item so the app launches at startup
+        if #available(macOS 13.0, *) {
+            try? SMAppService.mainApp.register()
         }
 
         // Disable caffeinate when lid is closed (system sleep)
