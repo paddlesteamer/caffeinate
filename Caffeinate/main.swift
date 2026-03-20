@@ -8,21 +8,35 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Create the status bar item
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        
+
         if let button = statusItem.button {
             button.action = #selector(toggleCaffeinate)
             button.target = self
             updateIcon()
         }
-        
+
         // Create right-click menu
         let menu = NSMenu()
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(quit), keyEquivalent: "q"))
         statusItem.menu = nil // We'll handle left-click ourselves
-        
+
         // Add right-click support
         if let button = statusItem.button {
             button.sendAction(on: [.leftMouseUp, .rightMouseUp])
+        }
+
+        // Disable caffeinate when lid is closed (system sleep)
+        NSWorkspace.shared.notificationCenter.addObserver(
+            self,
+            selector: #selector(handleSleep),
+            name: NSWorkspace.willSleepNotification,
+            object: nil
+        )
+    }
+
+    @objc func handleSleep(_ notification: Notification) {
+        if isActive {
+            stopCaffeinate()
         }
     }
     

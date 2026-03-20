@@ -7,6 +7,7 @@ A simple macOS menu bar app that toggles the `caffeinate -d` command to prevent 
 - **Left-click**: Toggle caffeinate on/off
 - **Right-click**: Quit the app
 - Visual feedback with different icons for active/inactive states
+- Automatically disables when the lid is closed
 - Runs as a menu bar app (no dock icon)
 
 ## What is `caffeinate -d`?
